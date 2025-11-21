@@ -14,7 +14,7 @@ const __dirname = path.dirname(__filename);
 // MIDDLEWARE
 // =======================
 app.use(express.json());
-app.use(express.static(path.join(__dirname, "public"))); // phục vụ file static từ public/
+app.use(express.static(path.join(__dirname, "client", "build"))); // phục vụ React build
 
 // =======================
 // API CHAT MẪU
@@ -30,10 +30,10 @@ app.post("/chat", (req, res) => {
 });
 
 // =======================
-// Fallback: nếu không match API, trả home.html
+// Fallback: nếu không match API, trả React index.html
 // =======================
 app.get("*", (req, res) => {
-  res.sendFile(path.join(__dirname, "public", "home.html"));
+  res.sendFile(path.join(__dirname, "client", "build", "index.html"));
 });
 
 // =======================
@@ -43,6 +43,6 @@ const PORT = process.env.PORT || 3000;
 app.listen(PORT, () => {
   console.log("=================================");
   console.log(`🚀 Server chạy tại http://localhost:${PORT}`);
-  console.log("📌 Phục vụ home.html từ /public");
+  console.log("📌 Phục vụ React từ /client/build");
   console.log("=================================");
 });
